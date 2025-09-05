@@ -20,8 +20,12 @@ class Product(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=400, default='', null=True)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=12)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='upload/product/') 
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    picture = models.ImageField(upload_to='upload/product/')
+
+    AMOUNTS = (('1 baste', 1),('2baste',2),('3 baste',3))
+    amount = models.CharField(max_length=20, choices=AMOUNTS, default=1)
+
     def __str__(self):
         return f'{self.name} - {self.price}'
     
