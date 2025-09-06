@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -22,10 +23,15 @@ class Product(models.Model):
     price = models.DecimalField(default=0, decimal_places=2, max_digits=12)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     picture = models.ImageField(upload_to='upload/product/')
+    is_sale = models.BooleanField(default=False)
+    sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=20 )
+    star = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
+    is_available = models.BooleanField(default=False)
 
-    AMOUNTS = (('1 baste', 1),('2baste',2),('3 baste',3))
+    AMOUNTS = (('1 baste', 1),('2baste',2),('3 baste',3)) 
     amount = models.CharField(max_length=20, choices=AMOUNTS, default=1)
-
+    
+   
     def __str__(self):
         return f'{self.name} - {self.price}'
     
