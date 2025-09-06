@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop'
+    'django.contrib.humanize',
+    'shop',
 ]
 
 MIDDLEWARE = [
@@ -109,6 +110,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+# USE_THOUSAND_SEPARATOR = True
 
 USE_TZ = True
 
