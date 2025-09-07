@@ -30,9 +30,20 @@
     <!-- Navigation-->
     {% include 'navbar.html' %}
     <!-- Header-->
+    <!-- messages -->
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      {% endfor %}
+    {% endif %}
 
     <!-- Block content -->
-    {% block content%} {% endblock %}
+    {% block content%} 
+    {% endblock %}
     <!-- Section-->
 
     <!-- Footer-->
