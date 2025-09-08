@@ -64,4 +64,6 @@ def signup_user(request):
     else:
         return render(request, 'signup.html', {'form':form})
 
-    
+def product(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(render, 'product.html', {'product':product})
