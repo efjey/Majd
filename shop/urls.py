@@ -1,13 +1,14 @@
 
-from .views import *
-from django.urls import path, include
+from . import views
+from django.urls import path
  
 
 urlpatterns = [
   
-    path('', helloAdmin, name="home"),
-    path('about/', about, name="about"),
-    path('learn/', learn, name="learn"),
-    path('login/', login_user, name="login"),
-    path('logout/', logout_user, name="logout"),
+    path('', views.helloAdmin, name="home"),
+    path('about/', views.about, name="about"),
+    path('learn/', views.learn, name="learn"),
+    path('login/', views.login_user, name="login"),
+    path('logout/', views.logout_user, name="logout"),
+    path('signup/', views.signup_user, name="signup"),
 ]

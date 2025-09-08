@@ -15,6 +15,7 @@
                         <li><a class="dropdown-item" href="{% url 'logout'%}">خروج از حساب</a></li>
                         {% else %}
                         <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="{% url 'signup'%}"> ایجاد حساب کاربری</a></li>
                         <li><a class="dropdown-item" href="{% url 'login'%}">ورود به حساب</a></li>
                         {% endif %}
                     </ul>
