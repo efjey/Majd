@@ -11,14 +11,17 @@
     </div>
     <div class="col-md-7">
       <div class="card-body">
-        <h1 class="card-title">{{ product.name }}</h1><br><br>
-        <h4 class="card-text">{{ product.description }}</h4><br><br>
+        <h1 class="card-title">{{ product.name }}</h1><br>
+        <h3 class="card-text">{{ product.description }}</h3><br><br>
         {% if product.is_sale  %}
             <h3 class="card-title"><strike> {{ product.price  | intcomma}}  تومان   </strike>  {{ product.sale_price | intcomma}} تومان</h3>
         {% else %}
-            <h3 class="card-title">{{ product.price  | intcomma}} تومان</h3>
+            <h3 class="card-title">{{ product.price  | intcomma}} تومان</h3> 
         {% endif %}
+        <br><br>
+        <button class="btn btn-secondary" type='button' value='{{ product.id }}' id='add-cart'>اضافه کردن به سبد خرید</button>
         <a href="{% url 'home'%}" class='btn btn-secondary'>بازگشت به صفحه اصلی</a>
+        
       </div>
     </div>
     
@@ -27,6 +30,28 @@
 </div>
 
 </div><br><br><br><br><br><br><br>
+<script>
+  $(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+      type:'POST',
+      url: '{% url 'cart_add' %}',
+      data: {
+        product_id: $('#add-cart').val(),
+        csrfmiddlewaretoken: '{{ csrf_token }}', 
+        action:'post'
+      },
+
+      success: function(json){
+        console.log(json)
+      },
+
+      error: function(xhr, errmsg, err){
+
+      }
+    })
+  })
+</script>
 
 {% endblock %}
 
