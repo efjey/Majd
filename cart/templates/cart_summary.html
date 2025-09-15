@@ -22,15 +22,26 @@
         <div class="col-md-4">
         <img src="{{ product.picture.url }}" class="img-fluid rounded-start" alt="...">
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
         <div class="card-body">
-            <h1 class="card-title">{{ product.name }}</h1><br>
-            <h3 class="card-text">{{ product.description }}</h3><br><br>
+            <h5 class="card-title">{{ product.name }}</h5><br>
+            <p class="card-text">{{ product.description }}</p><br><br>
             {% if product.is_sale  %}
-                <h3 class="card-title"><strike> {{ product.price  | intcomma}}  تومان   </strike>  {{ product.sale_price | intcomma}} تومان</h3>
+                <p class="card-title"><strike> {{ product.price  | intcomma}}  تومان   </strike>  {{ product.sale_price | intcomma}} تومان</p>
             {% else %}
-                <h3 class="card-title">{{ product.price  | intcomma}} تومان</h3> 
+                <p class="card-title">{{ product.price  | intcomma}} تومان</p> 
             {% endif %}
+            <p class="card-title">تعداد:
+
+                {% for key,value in quantities.items %}
+                    {% if key == product.id|slugify %}
+                        {{ value }}
+                    {% endif %}
+
+
+                {% endfor %}
+                
+            </p>
             <br><br>
             <a href="{% url 'home'%}" class='btn btn-secondary'>بازگشت به صفحه اصلی</a>
             
