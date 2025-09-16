@@ -32,17 +32,26 @@
                 <p class="card-title">{{ product.price  | intcomma}} تومان</p> 
             {% endif %}
             <p class="card-title">تعداد:
+                <select class="form-select" id="select{{ product.id }}">
 
-                {% for key,value in quantities.items %}
-                    {% if key == product.id|slugify %}
-                        {{ value }}
-                    {% endif %}
+                    {% for key,value in quantities.items %}
+                        {% if key == product.id|slugify %}
+                            <option selected>{{ value }}</option>
+                        {% endif %}
 
+                    {% endfor %}                     
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="3">4</option>
+                    <option value="3">5</option>
+                  </select>
 
-                {% endfor %}
-                
+    
             </p>
-            <br><br>
+            
+            <button type='button' data-index={{ product.id }}
+            class='btn btn-primary update-cart'>ویرایش</button>
             <a href="{% url 'home'%}" class='btn btn-secondary'>بازگشت به صفحه اصلی</a>
             
         </div>
@@ -58,5 +67,32 @@
     {% endif %}
 <!-- Section-->
 <br><br><br><br><br><br><br><br><br>
+
+<!-- script -->
+
+<script>
+    $(document).on('click', '.update-cart', function(e){
+        e.preventDefault();
+        var productid = $(this).data('index')
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'cart_update' %}',
+            data: {
+                product_id: $(this).data('index'),
+                product_qty: $('#select'+productid+' option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            success: function(json){
+                location.reload();
+
+            },
+        })
+    })
+
+
+
+</script>
+
 <!-- Footer-->
 {% endblock %}
