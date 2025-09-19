@@ -23,10 +23,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">فروشگاه</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/">تمام محصولات</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category_summary'%}">دسته بندی ها </a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'کالای-دیجیتال'%}">کالای دیجیتال </a></li>
+                        <li><a class="dropdown-item" href="{% url 'category' 'کالای-دیجیتال'%}">غذای روز</a></li>
                         <li><a class="dropdown-item" href="{% url 'category' 'همیشگی-ها'%}">همیشگی ها</a></li>
+
                         <li><a class="dropdown-item" href="/">محصولات جدید</a></li>
                     </ul>
                 </li>

@@ -77,3 +77,7 @@ def category(request, cat):
     except:
         messages.success(request, ('دسته بندی وجود ندارد'))
         return redirect("home")
+    
+def category_summary(request):
+    all_cat = Category.objects.all()
+    return render(request, 'category_summary.html', {'category':all_cat})
