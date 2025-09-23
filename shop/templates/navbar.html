@@ -14,6 +14,7 @@
                         {% if user.is_authenticated %}
                         <li><a class="dropdown-item" href="{% url 'logout'%}">خروج از حساب</a></li>
                         <li><a class="dropdown-item" href="{% url 'update_user'%}"> حساب کاربری </a></li>
+                        <li><a class="dropdown-item" href="{% url 'update_info'%}">اطلاعات تکمیلی</a></li>
                         {% else %}
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{% url 'signup'%}"> ایجاد حساب کاربری</a></li>

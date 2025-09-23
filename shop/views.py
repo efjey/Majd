@@ -1,16 +1,16 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Product, Category
+from .models import Product, Category, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from.forms import SignUpForm, UpdateUserForm, UpdatePasswordForm
+from .forms import SignUpForm, UpdateUserForm, UpdatePasswordForm, UpdateUserInfo
+
 
 
 def helloAdmin(request):
     all_products = Product.objects.all()
-    
     return render(request, 'index.html', {'products': all_products})
 
 
@@ -21,6 +21,7 @@ def learn(request):
     return render(request, 'learn.html')
 
 def login_user(request):
+
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -56,7 +57,7 @@ def signup_user(request):
             
             messages.success(request, ("حساب کاربری با موفیت ساخته شد"))
 
-            return redirect("home")
+            return redirect("update_info")
         else:
             print(form.errors)
             messages.success(request, ('مشکلی در ثبت نام وجود دارد'))
@@ -65,6 +66,7 @@ def signup_user(request):
         return render(request, 'signup.html', {'form':form})
     
 def update_user(request):
+
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
         user_form = UpdateUserForm(request.POST or None, instance = current_user)
@@ -81,6 +83,7 @@ def update_user(request):
         return redirect('home')
     
 def update_password(request):
+
     if request.user.is_authenticated:
         current_user = request.user
 
@@ -102,6 +105,24 @@ def update_password(request):
     else:
         messages.success(request, 'باید اول لاگین کنید')
         return redirect('login')
+
+def update_info(request):
+
+    if request.user.is_authenticated:
+        current_user = Profile.objects.get(user__id=request.user.id)
+        form = UpdateUserInfo(request.POST or None, instance = current_user)
+
+        if form.is_valid():
+            form.save()
+            
+            messages.success(request, 'اطلاعات تکمیلی شما ویرایش شد')
+            return redirect('home')
+        return render(request, 'update_info.html', {'form':form})
+    
+    else:
+        messages.success(request, 'ابتدا باید وارد حساب کاربری شوید')
+        return redirect('home')
+    
 
     
 
