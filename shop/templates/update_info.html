@@ -14,11 +14,17 @@
         <center>
             <div class="col-8">
             <p align="justify">
+                
                 <form method=POST action="{% url 'update_info' %}">
                     {% csrf_token %}
-                        {{ form.as_p }}
-                        <br><br>
+                    <strong>اطلاعات کاربری</strong><br><br>
                     
+                        {{ form.as_p }}
+                        <strong>اطلاعات ارسال</strong>
+                        <br><br>
+                        {{ shipping_form.as_p}}
+                        <br>
+                        
                     <button type="submit" class="btn btn-secondary"> ویرایش اطلاعات</button>
                   </form>
                   
