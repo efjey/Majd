@@ -65,12 +65,17 @@
     
     </div>
     {% endfor %}
-    <h2>مجموع سفارشات: {{ total | intcomma}} تومان</h2>
+    <h2>مجموع سفارشات: {{ total | intcomma}} تومان</h2> 
+    <a href="{% url 'checkout'%}" class="btn btn-success">مشاهده صورت حساب</a>
 
     {% else %}
-    <br>
+    
+    
     <center><h3 class="container">سبد شما خالیست &#128532; </h3></center>
     {% endif %}
+    
+    
+    
 <!-- Section-->
 <br><br><br><br><br><br><br><br><br>
 
