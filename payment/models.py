@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from shop.models import Product
+from django.db.models.signals import post_save
 
 class ShippingAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     shipping_full_name = models.CharField(max_length=250)
-    shipping_email = models.CharField(max_length=250)
+    shipping_email = models.CharField(max_length=250,blank=True)
     shipping_phone = models.CharField(max_length=25, blank=True)
     shipping_address1 = models.CharField(max_length=225, blank=True)
     shipping_address2 = models.CharField(max_length=225, blank=True, null=True)
@@ -20,6 +21,13 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return f"shipping Address From {self.shipping_full_name}"
+    
+def create_shipping_user(sender, instance, created, **kwargs):
+    if created:
+        user_shipping = ShippingAddress(user=instance)
+        user_shipping.save()
+
+post_save.connect(create_shipping_user, sender=User)
     
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

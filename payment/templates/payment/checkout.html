@@ -43,7 +43,8 @@
                         </small><br>
                         <hr>
                       {% endfor%}
-                      <br>
+                      <strong>مجموع کل سفارشات: {{ total | intcomma }}</strong>
+                      <br><br>
                       <a href="{% url 'cart_summary' %}" class='btn btn-sm btn-outline-secondary'>ویرایش محصولات</a>
                     </div>
                 </div>
@@ -57,6 +58,8 @@
                     </div>
                 </div>
             </div>
+            <br>
+            
             <br>
             <a href="#" class='btn btn-sm btn-outline-primary'>ادامه و ثبت سفارش</a>
             
