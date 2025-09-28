@@ -6,8 +6,8 @@
 <header class="bg-dark py-5">
 <div class="container px-4 px-lg-5 my-5">
     <div class="text-center text-white">
-        <h1 class="display-4 fw-bolder">صورت حساب </h1>
-        <p class="lead fw-normal text-white-50 mb-0"> لطفا قبل از پرداخت سفارش خود را چک کیند </p>
+        <h1 class="display-4 fw-bolder">تایید نهایی</h1>
+        <p class="lead fw-normal text-white-50 mb-0"> کترینگ مجد</p>
     </div>
 </div>
 </header>
@@ -18,7 +18,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-header">
-                      خلاصه سفارشات 
+                      فاکتور نهایی
                     </div>
                     <div class="card-body">
                         
@@ -43,9 +43,9 @@
                         </small><br>
                         <hr>
                       {% endfor%}
-                      <strong>مجموع کل سفارشات: {{ total | intcomma }}</strong>
-                      <br><br>
-                      <a href="{% url 'cart_summary' %}" class='btn btn-sm btn-outline-secondary'>ویرایش محصولات</a>
+                      <strong>قابل پرداخت: {{ total | intcomma }}</strong>
+                      
+                      
                     </div>
                 </div>
                 <br>
@@ -54,17 +54,18 @@
                       مشخصات ارسال
                     </div>
                     <div class="card-body">
-        <form action="{% url 'confirm_order' %}" method='POST'>
-            {% csrf_token %}
-                      {{ shipping_form.as_p }}
+                      نام و نام خانوادگی: {{ shipping_info.shipping_full_name }} <br>
+                      آدرس: {{ shipping_info.shipping_address1 }} <br>
+                      کدپستی: {{ shipping_info.shipping_zipcode }} <br>
+                      شماره تماس: {{ shipping_info.shipping_phone }} <br>
                     </div>
                 </div>
             </div>
             <br>
             
             <br>
-            <button type='submit' class='btn btn-sm btn-outline-primary'>ادامه برای تایید نهایی</button>
-        </form>
+            <a href="#" class='btn btn-sm btn-outline-primary'>تایید و پرداخت</a>
+            
         </center>
     </div>
 </div>
