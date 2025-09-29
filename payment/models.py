@@ -30,12 +30,19 @@ def create_shipping_user(sender, instance, created, **kwargs):
 post_save.connect(create_shipping_user, sender=User)
     
 class Order(models.Model):
+    STATUS_ORDER = [
+        ('Pending', 'در انتظار پرداخت'),
+        ('Processing', 'در حال پردازش'),
+        ('Shipped', 'ارسال شده به پست'),
+        ('Delivered', 'تحویل به مشتری'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     full_name = models.CharField(max_length=250)
     email = models.EmailField(max_length=300)
     shipping_address = models.TextField(max_length=150000)
     amount_paid = models.DecimalField( max_digits=15, decimal_places=0)
     date_ordered = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=50, choices=STATUS_ORDER, default='Pending')
 
     def __str__(self):
         return f'order - {str(self.id)}'
