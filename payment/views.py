@@ -87,6 +87,10 @@ def process_order(request):
                             user = user
                         )
                         new_item.save()
+            
+            for key in list(request.session.keys()):
+                if key == 'session_key':
+                    del request.session[key]
 
             
 
@@ -122,6 +126,10 @@ def process_order(request):
                             
                         )
                         new_item.save()
+            
+            for key in list(request.session.keys()):
+                if key == 'session_key':
+                    del request.session[key]
 
             messages.success(request, "سفارش ثبت شد")
             return redirect('home')
