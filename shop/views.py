@@ -10,11 +10,25 @@ from django.db.models import Q
 import json
 from cart.cart import Cart
 from payment.forms import ShippingForm
-from payment.models import ShippingAddress
+from payment.models import ShippingAddress, Order
 
 def helloAdmin(request):
     all_products = Product.objects.all()
     return render(request, 'index.html', {'products': all_products})
+
+def user_orders(request):
+    if request.user.is_authenticated:
+        delivered_orders = Order.objects.filter(user=request.user, status='Delivered')
+        other_orders = Order.objects.filter(user=request.user).exclude(status='Delivered')
+
+        context = {
+            'delivered': delivered_orders,
+            'other': other_orders,
+        }
+        return render(request, 'orders.html', context)
+    else:
+        messages.success(request, 'دسترسی به این صفحه امکان پذیر نمیباشد')
+        return redirect('home')
 
 def search(request):
     if request.method == 'POST':

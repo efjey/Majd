@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Header-->
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">سفارشات شما</h1>
+      <p class="lead fw-normal text-white-50 mb-0"></p>
+    </div>
+  </div>
+</header>
+<br /><br />
+<div class="container">
+  <div class="row">
+    <center>
+      <div class="col-8">
+        {% if other %} 
+        <h3>سفارشات جاری</h3>
+        <table class="table">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="col">شماره سفارش</th>
+              <th scope="col">به نام</th>
+              <th scope="col">تاریخ ثبت</th>
+              <th scope="col">مبلغ </th>
+              <th scope="col">وضعیت</th>
+            </tr>
+            {% for order in other%}
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{ order.id }}</th>
+              <td>{{ order.full_name}}</td>
+              <td>{{ order.date_ordered}}</td>
+              <td>{{ order.amount_paid }}</td>
+              <td>{{ order.get_status_display }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        سفارشی در جریان نیست
+        {% endif%}
+
+        {% if delivered %} 
+        <h3>سفارشات انجام شده</h3>
+        <table class="table">
+          <thead class="table-success">
+            <tr>
+              <th scope="col">شماره سفارش</th>
+              <th scope="col">به نام</th>
+              <th scope="col">تاریخ تحویل</th>
+              <th scope="col">مبلغ </th>
+              <th scope="col">وضعیت</th>
+            </tr>
+            {% for order in delivered %}
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{ order.id }}</th>
+              <td>{{ order.full_name}}</td>
+              <td>{{ order.last_update}}</td>
+              <td>{{ order.amount_paid }}</td>
+              <td>{{ order.get_status_display }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+         <h3> سفارشی به اتمام نرسید </h3>
+        {% endif%}
+      </div>
+    </center>
+  </div>
+</div>
+<br /><br />
+
+{% endblock %}
