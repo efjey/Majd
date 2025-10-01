@@ -39,6 +39,10 @@ class ShippingForm(forms.ModelForm):
     #     widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':''})
     #     required=False)shipping_
 
+    shipping_phone = forms.IntegerField(label="",
+        widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'شماره تماس'}),
+        required=True)
+
     class Meta:
         model = ShippingAddress
         fields=[
@@ -48,7 +52,8 @@ class ShippingForm(forms.ModelForm):
             'shipping_email',
             'shipping_city',
             'shipping_state',
-            'shipping_zipcode',        
+            'shipping_zipcode',
+            'shipping_phone',      
         ]
 
         exclude = ['user',]
