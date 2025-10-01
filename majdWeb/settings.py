@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'payment',
+    'django_jalali'
 ]
 
 MIDDLEWARE = [
