@@ -31,8 +31,8 @@
             <tr>
               <th scope="row">{{ order.id }}</th>
               <td>{{ order.full_name}}</td>
-              <td>{{ order.date_ordered}}</td>
-              <td>{{ order.amount_paid |  jformat:"%Y-%m-%d %H:%M"}}</td>
+              <td>{{ order.date_ordered  |  jformat:"%Y-%m-%d %H:%M"}}</td>
+              <td>{{ order.amount_paid}}</td>
               <td>{{ order.get_status_display }}</td>
             </tr>
             {% endfor %}
