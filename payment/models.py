@@ -34,9 +34,9 @@ post_save.connect(create_shipping_user, sender=User)
 class Order(models.Model):
     STATUS_ORDER = [
         ('Pending', 'در انتظار پرداخت'),
-        ('Processing', 'در حال پردازش'),
-        ('Shipped', 'ارسال شده به پست'),
-        ('Delivered', 'تحویل به مشتری'),
+        ('Processing', 'در حال آماده سازی'),
+        ('Shipped', 'ارسال شده توسط پیک'),
+        ('Delivered', 'تحویل داده شد '),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     full_name = models.CharField(max_length=250)

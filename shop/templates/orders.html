@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
+{% load humanize %}
 {% load jformat %}
 <!-- Header-->
 <header class="bg-dark py-5">
@@ -32,7 +34,7 @@
               <th scope="row">{{ order.id }}</th>
               <td>{{ order.full_name}}</td>
               <td>{{ order.date_ordered  |  jformat:"%Y-%m-%d %H:%M"}}</td>
-              <td>{{ order.amount_paid}}</td>
+              <td>{{ order.amount_paid | intcomma }} تومان</td>
               <td>{{ order.get_status_display }}</td>
             </tr>
             {% endfor %}
@@ -60,7 +62,7 @@
               <th scope="row">{{ order.id }}</th>
               <td>{{ order.full_name}}</td>
               <td>{{ order.last_update |  jformat:"%Y-%m-%d %H:%M"}}</td>
-              <td>{{ order.amount_paid }}</td>
+              <td>{{ order.amount_paid | intcomma }} تومان </td>
               <td>{{ order.get_status_display }}</td>
             </tr>
             {% endfor %}
