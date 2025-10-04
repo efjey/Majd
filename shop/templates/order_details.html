@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load humanize %}
+{% load jformat %}
+<!-- Header-->
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">جزییات سفارش  </h1>
+      <p class="lead fw-normal text-white-50 mb-0"></p>
+    </div>
+  </div>
+</header>
+<br /><br />
+<div class="container">
+  <div class="row">
+    <center>
+      <div class="col-8">
+        
+      
+
+        <div class="card">
+          <div class="card-header">
+            سفارش {{ order.id }} - {{ order.amount_paid | intcomma }} تومان  
+          </div>
+          <div class="card-body">
+            به نام: {{order.full_name}}<br>
+            
+            آدرس: {{ order.shipping_address }}<br>
+            تاریخ ثبت: {{ order.date_ordered |  jformat:"%Y-%m-%d %H:%M" }}<br>
+            وضعیت:  {{ order.get_status_display}}<br>
+            <hr>
+            کالاها:<br>
+              {% for item in items %}
+                {{ item.product }} | تعداد {{ item.quantity }} عدد | {{ item.price | intcomma}} تومان <br>
+              {% endfor %}
+          </div>
+        </div><br>
+        <a href="{% url 'orders' %}" class="btn btn-primary">بازگشت به سفارشات</a>
+        
+      </div>
+    </center>
+  </div>
+</div>
+<br /><br />
+
+{% endblock %}

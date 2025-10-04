@@ -27,11 +27,12 @@
               <th scope="col">مبلغ </th>
               <th scope="col">وضعیت</th>
             </tr>
-            {% for order in other%}
+            {% for order in other %}
           </thead>
           <tbody>
             <tr>
-              <th scope="row">{{ order.id }}</th>
+              <th scope="row"><a href="{% url 'order_details' order.id %}">سفارش شماره {{ order.id }}</a></th>
+              
               <td>{{ order.full_name}}</td>
               <td>{{ order.date_ordered  |  jformat:"%Y-%m-%d %H:%M"}}</td>
               <td>{{ order.amount_paid | intcomma }} تومان</td>
@@ -59,7 +60,7 @@
           </thead>
           <tbody>
             <tr>
-              <th scope="row">{{ order.id }}</th>
+              <th scope="row"><a href="{% url 'order_details' order.id %}">سفارش شماره {{ order.id }}</a></th>
               <td>{{ order.full_name}}</td>
               <td>{{ order.last_update |  jformat:"%Y-%m-%d %H:%M"}}</td>
               <td>{{ order.amount_paid | intcomma }} تومان </td>

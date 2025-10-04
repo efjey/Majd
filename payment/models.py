@@ -41,6 +41,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     full_name = models.CharField(max_length=250)
     email = models.EmailField(max_length=300)
+   
     shipping_address = models.TextField(max_length=150000)
     amount_paid = models.DecimalField( max_digits=15, decimal_places=0)
     date_ordered = jmodels.jDateTimeField(auto_now_add=True)
