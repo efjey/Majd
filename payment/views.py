@@ -51,7 +51,7 @@ def process_order(request):
 
         user_shipping = request.session.get('user_shipping')
 
-        full_address = f'{user_shipping['shipping_address1']}'
+        full_address = f"{user_shipping['shipping_address1']}"
         full_name = user_shipping['shipping_full_name']
         email = user_shipping['shipping_email']
 
